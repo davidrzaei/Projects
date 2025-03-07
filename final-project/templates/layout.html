@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}To-Do List{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{% block heading %}To-Do List{% endblock %}</h1>
+
+        {% block content %}
+            <!-- Default content for child templates -->
+        {% endblock %}
+
+        <!-- Scripts -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Register form submission
+                var registerForm = document.getElementById("registerForm");
+                if (registerForm) {
+                    registerForm.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        var newUsername = document.getElementById("username").value;
+                        var newPassword = document.getElementById("password").value;
+                        var confirmPassword = document.getElementById("confirm_password").value;
+
+                        if (newUsername === "" || newPassword === "" || confirmPassword === "") {
+                            alert("Please fill in all fields.");
+                            return;
+                        }
+
+                        if (newPassword !== confirmPassword) {
+                            alert("Passwords do not match.");
+                            return;
+                        }
+
+                        // Your registration logic here, e.g., AJAX request to register the user
+                        console.log("Registering user:", newUsername, newPassword);
+                    });
+                }
+
+                // Login form submission
+                var loginForm = document.getElementById("loginForm");
+                if (loginForm) {
+                    loginForm.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        var username = document.getElementById("username").value;
+                        var password = document.getElementById("password").value;
+
+                        if (username === "" || password === "") {
+                            alert("Please fill in all fields.");
+                            return;
+                        }
+
+                        // Your login logic here, e.g., AJAX request to authenticate the user
+                        console.log("Logging in user:", username, password);
+                    });
+                }
+
+                // Logout button click
+                var logoutButton = document.getElementById("logoutButton");
+                if (logoutButton) {
+                    logoutButton.addEventListener("click", function(event) {
+                        // Your logout logic here, e.g., AJAX request to logout the user
+                        console.log("Logging out user...");
+                    });
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

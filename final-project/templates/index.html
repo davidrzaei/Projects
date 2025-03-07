@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div id="loginSection">
+            <form method="POST" action="{{ url_for('login') }}">
+                <input type="text" id="username" name="username" placeholder="Username">
+                <input type="password" id="password" name="password" placeholder="Password">
+                <button type="submit">Login</button>
+                <button type="button" onclick="toggleRegisterForm()">Register</button>
+            </form>
+        </div>
+        <div id="registerSection" style="display: none;">
+            <form method="POST" action="{{ url_for('register') }}">
+                <input type="text" id="newUsername" name="newUsername" placeholder="New Username">
+                <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
+                <button type="submit">Register</button>
+                <button type="button" onclick="toggleRegisterForm()">Cancel</button>
+            </form>
+        </div>
+        <div id="todoSection" style="display: none;">
+            <input type="text" id="taskInput" placeholder="Add new task">
+            <button onclick="addTask()">Add</button>
+            <button onclick="logout()">Logout</button>
+            <ul id="taskList">
+                <!-- Tasks will be added dynamically here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
