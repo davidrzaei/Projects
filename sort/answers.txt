@@ -1,0 +1,19 @@
+sort1 uses: Bubble sort
+
+How do you know?:
+Random and Reversed takes roughly the same time,
+but when going through already sorted, the timing becomes significantly lower.
+
+sort2 uses: Merge sort
+
+How do you know?:
+It used roughly the same time to sort random, reversed, and already sorted numbers.
+It also generaly uses the least amount of time to do it.
+
+sort3 uses: Selection sort
+
+How do you know?:
+All three sortings takes roughly the same time, which would indicating
+(like merge) that it goes through a predetermined amount of steps from start-end.
+However, as it comes out with timing higher than sort 2,
+odds are that it is using Selection sorting rather than merge.

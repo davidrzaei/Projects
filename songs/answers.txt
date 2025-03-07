@@ -1,0 +1,33 @@
+If songs.db contains the top 100 songs of one listener from 2018, how would you characterize their audio aura?
+___________________________________________________________________________________________________________________
+
+One way that we can calculate the auora of the playlist creator based of the avg of ex. energy, dancability, and tempo.
+These three parementers seems reasonable to use, as they per design indicate whether or not a song is dancable, and whether or not the energy and tempo is high or low.
+A song which is high energy, high tempo, and dancable might indicate a song which was made for ex. a club enviroment, whereas a song which might have a low energy, mid tempo, but high danacability may indicate a song used in ex. a slow dance.
+Given the avg of these tree paremeters, the creator of the playlist should be someone likes a bit more energy, a decent amount of tempo, and likes to dance.
+We might insinuate that the creator of the playlist might be a 20-25 year old college student based on this.
+
+
+
+
+Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener.
+What better ways of calculating this aura would you propose?
+____________________________________________________________________________________________________________
+
+Where this calculation takes a wrong turn is the use of avg.
+If we look a bit closer, we can see that most of the paremeters have a wide spand below and above their avg.
+As such, the avg of these does not offer any real information about the reasoning that might have been behind the songs inclussion.
+
+A way to get a bit closer to something usable, might be to querry about the amount of song that have ex. a tempo above 119.
+This would perhaps offer a better view of how much "club" music is actually present, rather that assume that the avg is a credible indication thereof.
+Ex. a playlist with 30/100 song with a tempo of 190, wheras the other 70/100 has a tempo of 60 would avg with a tempo of 102. A number which would neither indicate one or the other tempo correctly to an analyst.
+
+One might even make a group of ex. low tempo, mid tempo, and high tempo, and then further group these into ex. low, mid, and high energy, etc.
+From here, we might be able to tell some actual info about the creator of the playlist that, at least largy, isn't perfunctory or superficial.
+
+Data used:
+avg energy = 0.65096
+avg danceability = 0.71646
+avg loudness = -5.67764
+avg valence = 0.484443
+avg tempo = 119.90418
