@@ -1,0 +1,237 @@
+::-webkit-scrollbar {display:none;}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(orange, white, white, #97daf0, white, orange);
+}
+
+.container1 {
+  width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  background-color: ;
+  margin-top: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.box1 {
+  width: 600px;
+  height: 500px;
+  background: rgba(141, 210, 246, 0.15);
+  padding: 1em;
+  font-weight: 700;
+  color: var(--clr-light);
+  text-align: center;
+  border-radius: 16%;
+  margin: 0.1cm;
+  justify-content: space-between;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.6px);
+  -webkit-backdrop-filter: blur(3.6px);
+}
+
+.container2 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.box2 {
+  width: 1400px;
+  height: 600px;
+  background: rgba(141, 210, 246, 0.15);
+  padding: 0.5em;
+  font-weight: 700;
+  color: var(--clr-light);
+  text-align: center;
+  margin: 0.1cm;
+  justify-content: space-between;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.6px);
+  -webkit-backdrop-filter: blur(3.6px);
+}
+
+.container3 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.box3 {
+  width: 700px;
+  height: 550px;
+  background: rgba(141, 210, 246, 0.15);
+  padding: 1em;
+  font-weight: 700;
+  color: var(--clr-light);
+  text-align: center;
+  border-radius: 16%;
+  margin: 0.1cm;
+  justify-content: space-between;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.6px);
+  -webkit-backdrop-filter: blur(3.6px);
+}
+
+.box1,
+.box2,
+.box3 {
+  transition: transform 0.2s ease;
+}
+
+.box1:hover,
+.box2:hover,
+.box3:hover {
+  transform: scale(1.5);
+  z-index: 2;
+}
+
+.text {
+  width: 100%;
+  height: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 90px 0%;
+  flex-wrap: wrap;
+}
+
+.text1, .text2, .text3 {
+  width: 500px;
+  text-align: center;
+  margin: 0 10px;
+  color: #42694c;
+}
+
+.text-bottom {
+  text-align: center;
+  width: 100%;
+  height: 10%;
+  padding: 50px 5%;
+  margin-top: 10px;
+  margin-bottom: 10%;
+  flex-wrap: wrap;
+}
+
+.text-top {
+  width: 100%;
+  height: 10%;
+  padding: 40px;
+  font-size: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0cm;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.temp {
+  height: 250px;
+  font-size: 72px;
+  text-align: center;
+  line-height: 250px;
+  color: #2e425d;
+  margin-top: 2cm;
+
+}
+
+.text-info {
+  margin-top
+  width: 100%;
+  color: #000 !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(#403f3f, #000000, #403f3f);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-family: "Lucida Handwriting", "Courier New", cursive;
+  font-weight: 300;
+}
+
+li {
+  display: inline-block;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 25px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #403f3f;
+  color: white;
+}
+
+.container1 img,
+.container3 img {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16%
+}
+
+.container2 img {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+footer {
+  text-align: center;
+  background-color: #f7f4cb;
+  color: black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 70%;
+}
+

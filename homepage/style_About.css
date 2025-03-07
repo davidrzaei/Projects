@@ -1,0 +1,134 @@
+::-webkit-scrollbar {display:none;}
+
+body {
+  background: #fff;
+}
+
+
+
+.container {
+  position: relative;
+  background-color: red;
+}
+
+.section {
+  margin-top: 8cm;
+  background-color: #fff;
+  height: 15cm;
+  width: 30cm;
+  color: #000000;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 35%;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  font-family: "Baskerville", "Serif";
+  cursor: help;
+}
+
+.section:active {
+  background-color: #4d4d4d;
+  color: #4d4d4d;
+}
+
+@media screen and (max-width: 600px) {
+  .section:hover {
+    background-color: #4d4d4d;
+    color: #4d4d4d;
+  }
+}
+
+.about {
+  margin-top: -5cm;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    width: 100%;
+    height: auto;
+    font-size: 1.2rem;
+    margin-top: 3cm;
+    margin-bottom: 0.5cm;
+    border-radius: 0%
+  }
+  .about {
+    font-size: 0.9rem;
+  }
+
+}
+
+
+
+  .top {
+    margin-top: -2cm;
+    margin-bottom: 6rem;
+    margin-left: 1cm;
+    margin-right: 1cm;
+  }
+
+  .bottom {
+    margin-bottom: 6rem;
+    margin-left: 1cm;
+    margin-right: 1cm;
+  }
+  
+#clickOrPressText {
+  margin-top: 6cm; /* Adjust the margin-top value as needed */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(#403f3f, #000000, #403f3f);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-family: "Lucida Handwriting", "Courier New", cursive;
+  font-weight: 300;
+}
+
+li {
+  display: inline-block;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 25px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #403f3f;
+  color: white;
+}
+
+footer {
+  text-align: center;
+  background-color: #f7f4cb;
+  color: black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 70%;
+}
+
+
+

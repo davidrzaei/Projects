@@ -1,0 +1,123 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background: #fff;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(#fff, #e3e5e6, #e3e5e6, #fff);
+  height: 22cm;
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    height: auto;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%; /* Adjust height as needed */
+  width: 70%; /* Adjust width as needed */
+  margin: auto; /* Center the container horizontally */
+}
+
+button {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  height: 3cm; /* Adjust height as needed */
+  width: 3cm; /* Adjust width as needed */
+  font-size: 72px; /* Adjust font size as needed */
+  border-radius: 100%;
+  background-color: #75d5f0;
+  border: none;
+  overflow: hidden;
+  box-shadow: 2% 2% 8% rgba(0,0,0,.4); /* Adjust box shadow */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .button-container {
+    height: 50%;
+    width: 80%;
+    margin: 2rem;
+  }
+
+  button {
+    height: 3cm;
+    width: 3cm;
+    font-size: 72px;
+    box-shadow: 2% 2% 4% rgba(0,0,0,.4);
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(#403f3f, #000000, #403f3f);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-family: "Lucida Handwriting", "Courier New", cursive;
+  font-weight: 300;
+}
+
+li {
+  display: inline-block;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 25px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #403f3f;
+  color: white;
+}
+
+.temp {
+  margin-top: 5cm;
+  font-size: 72px;
+  text-align: center;
+  font-family: "Palatino", "Fantasy", cursive;
+  font-weight: 800;
+}
+
+@media screen and (max-width: 600px) {
+  .temp {
+    margin-top: 8rem;
+  }
+}
+footer {
+  text-align: center;
+  background-color: #f7f4cb;
+  color: black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 70%;
+}

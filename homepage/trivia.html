@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="style_Trivia.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trivia</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function()
+        {
+            let correct = document.querySelector('.correct');
+            let incorrects = document.querySelectorAll('.incorrect');
+
+            function handleClick(event) {
+            correct.removeEventListener('click', handleClick);
+            for (let i = 0; i < incorrects.length; i++)
+            {
+                incorrects[i].removeEventListener('click', handleClick);
+            }
+
+            if (event.target.classList.contains('correct'))
+            {
+                event.target.style.backgroundColor = 'green';
+                document.querySelector('#feedback1').innerHTML = 'Correct!';
+                }
+            else if (event.target.classList.contains('incorrect'))
+            {
+                event.target.style.backgroundColor = 'red';
+                document.querySelector('#feedback1').innerHTML = 'Incorrect!';
+            }
+        }
+
+        correct.addEventListener('click', handleClick);
+        for (let i = 0; i < incorrects.length; i++)
+        {
+            incorrects[i].addEventListener('click', handleClick);
+        }
+
+
+            function checkAnswer() {
+        let input = document.querySelector('input');
+        let correctAnswers = [
+            '384400', '384400km', '384400 km',
+            '384,400', '384,400km', '384,400 km',
+            '384.400', '384.400km', '384.400 km'
+        ];
+        let isCorrect = correctAnswers.some(answer => answer === input.value.trim());
+        if (isCorrect) {
+            input.style.backgroundColor = 'green';
+            document.querySelector('#feedback2').innerHTML = 'Correct!';
+        } else {
+            input.style.backgroundColor = 'red';
+            document.querySelector('#feedback2').innerHTML = 'Incorrect';
+        }
+    }
+
+
+    function checkAnswerAndDisableListener() {
+    checkAnswer();
+    document.querySelector('#check').removeEventListener('click', checkAnswerAndDisableListener);
+    document.querySelector('input').removeEventListener('keypress', enterListener);
+    }
+
+        function enterListener(event) {
+        if (event.key === 'Enter')
+        {
+            checkAnswerAndDisableListener();
+        }
+    }
+
+    document.querySelector('#check').addEventListener('click', checkAnswerAndDisableListener);
+    document.querySelector('input').addEventListener('keypress', enterListener);
+
+});
+    </script>
+</head>
+<body>
+
+    <div class="navbar">
+        <ul>
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="trivia.html">Trivia</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+
+    <div class="header">
+        <h1>Trivia!</h1>
+        <h4>By</h4>
+        <h3>David Lefeldt Rezaei</h3>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <h3>What is the Capital of Denmark?</h3>
+
+            <button class="incorrect">Stockholm</button>
+            <button class="incorrect">Oslo</button>
+            <button class="correct">Copenhagen</button>
+            <button class="incorrect">Berlin</button>
+
+            <p id="feedback1"></p>
+
+    </div>
+
+    <div class="section">
+        <h2>Part 2: Free Response</h2>
+        <hr>
+        <h3>What is the Distance Between the Earth and the Moon?</h3>
+        <p style="margin-bottom:-.5cm;"><h5>"(Rounded to Nearest KM)"</h5></p>
+        <input type="text"></input>
+        <button id="check">Check Answer</button>
+
+        <p id="feedback2"></p>
+    </div>
+</div>
+
+<footer>
+    <p>Footer<br>
+    <a href="https://turbo-space-guide-v66qxgw546w9hx6p-8080.app.github.dev/index.html">Home</a>
+    <a href="https://turbo-space-guide-v66qxgw546w9hx6p-8080.app.github.dev/contact.html">Contact</a>
+    <a href="https://turbo-space-guide-v66qxgw546w9hx6p-8080.app.github.dev/about.html">About</a></p>
+</footer>
+
+</body>
+</html>
