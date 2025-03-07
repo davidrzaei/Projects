@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+
+    <!-- Display todos -->
+    <ul id="todo-list">
+        {% for todo in todos %}
+            <li>{{ todo.content }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Form to add new todo -->
+    <form id="add-todo-form" method="POST">
+        <input type="text" name="content" placeholder="Enter new todo">
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <!-- Script to handle AJAX for adding todos -->
+    <script>
+        document.getElementById('add-todo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var content = document.querySelector('input[name="content"]').value;
+
+            fetch('/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: content }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Todo added successfully') {
+                    // Add new todo to list without refreshing page
+                    var todoList = document.getElementById('todo-list');
+                    var newTodo = document.createElement('li');
+                    newTodo.textContent = content;
+                    todoList.appendChild(newTodo);
+
+                    // Clear input field
+                    document.querySelector('input[name="content"]').value = '';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

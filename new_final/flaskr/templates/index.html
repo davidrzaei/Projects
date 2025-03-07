@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datepicker/datepicker.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Include jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <!-- Include daterangepicker library -->
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!-- Include Sortable library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <!-- Include datepicker library -->
+    <script src="https://cdn.jsdelivr.net/npm/datepicker/datepicker.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #ff6f61;
+            text-align: center;
+            margin-top: 0;
+        }
+        .todo-list {
+            margin-top: 20px;
+            width: 100%;
+        }
+        .todo-item {
+            background-color: #ffe0b2;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+            cursor: move;
+            width: 100%;
+        }
+        .todo-item:hover {
+            background-color: #ffcc80;
+        }
+        .todo-item p {
+            margin: 0;
+            flex: 1;
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+        .todo-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .edit, .delete {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        .edit {
+            background-color: #64b5f6;
+        }
+        .delete {
+            background-color: #f44336;
+        }
+        .add-todo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+            width: 100%;
+        }
+        .todo-input-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .todo-input-container input[type="text"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: all 0.3s;
+            width: 100px;
+        }
+        .todo-input-container input[type="text"]:focus {
+            border-color: #ff6f61;
+        }
+        .add-todo input[type="submit"] {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            align-self: center;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout a {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .logout a:hover {
+            background-color: #ff3d3d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ g.user.username }}</h2>
+        <div class="todo-list" id="todoList">
+            {% for todo in todos %}
+            <div class="todo-item" data-id="{{ todo.id }}">
+                <p>{{ todo.content }}</p>
+                <div class="todo-actions">
+                    <button class="edit"><i class="fas fa-edit"></i></button>
+                    <button class="delete"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form class="add-todo" onsubmit="addTodoItem(event)">
+            <div class="todo-input-container">
+                <input type="text" name="todo" placeholder="Add new todo" oninput="adjustWidth(this)" id="todoInput">
+            </div>
+            <input type="submit" value="Add">
+        </form>
+        <div class="logout">
+            {% if 'username' in session %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function adjustWidth(el) {
+            var minWidth = 100;
+            var padding = 16;
+            var computedWidth = (el.value.length + 1) * 8 + padding;
+            var finalWidth = Math.max(minWidth, computedWidth);
+            el.style.width = finalWidth + 'px';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var todoList = document.getElementById('todoList');
+            Sortable.create(todoList, {
+                animation: 150,
+                onEnd: function(evt) {
+                    var items = Array.from(todoList.children);
+                    var order = items.map(item => item.getAttribute('data-id'));
+                    // Send this order to your backend to save the new order if needed
+                }
+            });
+
+            // Add event listeners for delete buttons
+            document.querySelectorAll('.delete').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var todoItem = this.closest('.todo-item');
+                    var todoId = todoItem.getAttribute('data-id');
+                    todoItem.remove(); // Remove from UI immediately
+
+                    // Optionally, send a request to delete the todo item in the backend
+                    fetch(`/delete/${todoId}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            // Handle error if needed
+                            console.error('Failed to delete todo item');
+                        }
+                    });
+                });
+            });
+
+            // Add event listeners for edit buttons
+            document.querySelectorAll('.edit').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var todoItem = this.closest('.todo-item');
+                    var todoId = todoItem.getAttribute('data-id');
+                    var todoContent = todoItem.querySelector('p');
+                    var newContent = prompt('Edit todo:', todoContent.textContent);
+                    if (newContent !== null) {
+                        // Update UI immediately
+                        todoContent.textContent = newContent;
+
+                        // Send a request to update the todo item in the backend
+                        fetch(`/update/${todoId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ content: newContent })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                // Handle error if needed
+                                console.error('Failed to update todo item');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Handle form submission to add a new todo item
+            document.querySelector('.add-todo').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var todoInput = document.getElementById('todoInput');
+                var todoContent = todoInput.value.trim();
+
+                if (todoContent.length === 0) {
+                    alert('Please enter a todo item.');
+                    return;
+                }
+
+                // Create a new todo item element
+                var newTodoItem = document.createElement('div');
+                newTodoItem.className = 'todo-item';
+                newTodoItem.innerHTML = `
+                    <p>${todoContent}</p>
+                    <div class="todo-actions">
+                        <button class="edit"><i class="fas fa-edit"></i></button>
+                        <button class="delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+
+                // Append the new todo item to the todo list
+                todoList.appendChild(newTodoItem);
+
+                // Clear the input field
+                todoInput.value = '';
+
+                // Add event listeners for the new todo item's edit and delete buttons
+                newTodoItem.querySelector('.edit').addEventListener('click', function() {
+                    var todoItem = this.closest('.todo-item');
+                    var todoId = todoItem.getAttribute('data-id');
+                    var todoContent = todoItem.querySelector('p');
+                    var newContent = prompt('Edit todo:', todoContent.textContent);
+                    if (newContent !== null) {
+                        // Update UI immediately
+                        todoContent.textContent = newContent;
+
+                        // Send a request to update the todo item in the backend
+                        fetch(`/update/${todoId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ content: newContent })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                // Handle error if needed
+                                console.error('Failed to update todo item');
+                            }
+                        });
+                    }
+                });
+
+                newTodoItem.querySelector('.delete').addEventListener('click', function() {
+                    var todoItem = this.closest('.todo-item');
+                    todoItem.remove(); // Remove from UI immediately
+
+                    // Optionally, send a request to delete the todo item in the backend
+                    fetch(`/delete/${todoId}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            // Handle error if needed
+                            console.error('Failed to delete todo item');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
