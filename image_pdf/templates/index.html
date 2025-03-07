@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Additional inline style for body to ensure full page height */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Fallback background color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Images to Convert to PDF</h1>
+        <form id="image-form" action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="images" id="images" multiple>
+            <br><br>
+            <div id="conversion-type-div" style="display: none;">
+                <label for="conversion-type">Conversion Type:</label>
+                <select name="conversion-type" id="conversion-type">
+                    <option value="single">Single PDF</option>
+                    <option value="multiple">Separate PDFs</option>
+                </select>
+                <br><br>
+            </div>
+            <!-- New fields for customizable PDF settings -->
+            <label for="paper-size">Paper Size:</label>
+            <select name="paper-size" id="paper-size">
+                <option value="A0">A0</option>
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="A3">A3</option>
+                <option value="A4">A4</option>
+                <option value="A5">A5</option>
+                <option value="A6">A6</option>
+                <option value="A7">A7</option>
+                <option value="Letter">Letter</option>
+                <option value="Legal">Legal</option>
+                <!-- Add more options as needed -->
+            </select>
+            <br><br>
+            <label for="orientation">Orientation:</label>
+            <select name="orientation" id="orientation">
+                <option value="portrait">Portrait</option>
+                <option value="landscape">Landscape</option>
+            </select>
+            <br><br>
+            <label for="margin">Margin (inches):</label>
+            <input type="number" step="0.1" min="0" name="margin" id="margin" value="1.0">
+            <br><br>
+            <label for="quality">PDF Quality:</label>
+            <select name="quality" id="quality">
+                <option value="low">Low</option>
+                <option value="normal">Normal</option>
+                <option value="high">High</option>
+            </select>
+            <br><br>
+            <button type="submit" id="convert-button">Convert</button>
+        </form>
+    </div>
+
+    <script>
+        const imagesInput = document.getElementById('images');
+        const conversionTypeDiv = document.getElementById('conversion-type-div');
+        const convertButton = document.getElementById('convert-button');
+
+        imagesInput.addEventListener('change', function() {
+            if (imagesInput.files.length > 1) {
+                conversionTypeDiv.style.display = 'block';
+                convertButton.innerText = 'Convert Images';
+            } else {
+                conversionTypeDiv.style.display = 'none';
+                convertButton.innerText = 'Convert Image';
+            }
+        });
+
+        imagesInput.addEventListener('click', function() {
+            if (imagesInput.files.length === 1) {
+                conversionTypeDiv.style.display = 'none';
+                convertButton.innerText = 'Convert Image';
+            }
+        });
+    </script>
+</body>
+</html>
